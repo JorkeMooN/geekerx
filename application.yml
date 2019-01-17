@@ -1,0 +1,29 @@
+server:
+  port: 8600
+
+spring:
+  application:
+    name: xzl-config
+  cloud:
+      consul:
+        host: 192.168.100.150
+  #      host: 192.168.110.151
+        port: 8500
+        discovery:
+#          service-name: xzl-config
+#          register-health-check: true
+          instance-id: ${spring.application.name}:${spring.cloud.client.ipAddress}:${spring.application.instance_id:${server.port}}
+          ip-address: true
+      config:
+        server:
+          git:
+            uri: http://192.168.100.150:9010/wangshuang/geekerx_web/tree/dev/geekerx/src/main
+            search-paths: resources
+#            username: heliang@ryshh.com
+#            password: wjorke24
+        label: dev
+
+  security:
+    user:
+      name: xzlgroup
+      password: xzlgroup
